@@ -1,4 +1,4 @@
-package br.com.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia;
 
 import br.com.caelum.vraptor.ComponentRegistry;
 import br.com.caelum.vraptor.ioc.spring.SpringProvider;

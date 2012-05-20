@@ -1,4 +1,4 @@
-package br.com.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;

@@ -1,4 +1,4 @@
-package br.com.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia;
 
 import java.lang.reflect.Method;
 

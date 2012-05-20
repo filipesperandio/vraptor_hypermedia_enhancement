@@ -1,4 +1,4 @@
-package br.com.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +17,13 @@ import br.com.caelum.vraptor.restfulie.serialization.RestfulSerializationJSON;
 import br.com.caelum.vraptor.serialization.ProxyInitializer;
 import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 
+/**
+ * It replaces {@link RestfulSerializationJSON} generating link artifacts as
+ * current javascript libraries expect
+ * 
+ * @author filipesperandio
+ *
+ */
 @Component
 @RequestScoped
 public class HypermediaSerializationJSON extends RestfulSerializationJSON {
