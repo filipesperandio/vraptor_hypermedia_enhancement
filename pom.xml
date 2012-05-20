@@ -2,13 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.filipesperandio.vraptor</groupId>
-  <artifactId>vraptor-hypermedia-enhancement</artifactId>
+  <groupId>com.github.filipesperandio.vraptor</groupId>
+  <artifactId>vraptor-hypermedia</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
-  <name>vraptor_hypermedia_enhancement</name>
+  <version>1.0-SNAPSHOT</version>
+  <name>vraptor-hypermedia-enhancement</name>
   <description>Vraptor hypermedia enhancement</description>
-  <url>http://maven.apache.org</url>
+  <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
 
   <licenses>
     <license>
@@ -37,6 +37,12 @@
       <timezone>-3</timezone>
     </developer>
   </developers>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
 
   <dependencies>
     <dependency>
