@@ -22,7 +22,7 @@ import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
  * current javascript libraries expect
  * 
  * @author filipesperandio
- *
+ * @see HypermediaProvider
  */
 @Component
 @RequestScoped
