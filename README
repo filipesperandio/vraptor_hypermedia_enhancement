@@ -1,3 +1,25 @@
-Vraptor Hypermedia relations enhaced!
+Vraptor Hypermedia relations enhanced!
+
+Hypermedia relations model changed in order to help your javascript code to be more readable an easy to do.
+
+Instead of a json like the following one using RestfulSerializationJSON...
+
+link : {
+  rel : "delete",
+  href : "http://host/resource/id"
+}
+
+... you get a JSON like this:
+
+link : {
+  "delete" : {
+    method : "DELETE",
+    url : "/resource/id"
+  }
+}
+
+This model is pretty much complient to all common ajax javascript APIs available. Good examples are Angular and jQuery.
+
+
 
 
