@@ -11,7 +11,9 @@ Just add this entry to your pom.xml:
 ```
 
 ... or download the jar and add it manually to your project:
+
 http://search.maven.org/remotecontent?filepath=com/github/filipesperandio/vraptor/vraptor-hypermedia/3.4.0/vraptor-hypermedia-3.4.0.jar
+
 
 Update web.xml accordingly:
 ```xml
