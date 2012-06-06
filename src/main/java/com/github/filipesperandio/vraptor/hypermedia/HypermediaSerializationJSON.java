@@ -2,9 +2,6 @@ package com.github.filipesperandio.vraptor.hypermedia;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
-
 import br.com.caelum.vraptor.config.Configuration;
 import br.com.caelum.vraptor.http.route.Router;
 import br.com.caelum.vraptor.interceptor.TypeNameExtractor;
@@ -17,6 +14,9 @@ import br.com.caelum.vraptor.restfulie.serialization.RestfulSerializationJSON;
 import br.com.caelum.vraptor.serialization.ProxyInitializer;
 import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
+
 /**
  * It replaces {@link RestfulSerializationJSON} generating link artifacts as
  * current javascript libraries expect
@@ -28,11 +28,11 @@ import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 @RequestScoped
 public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 
-	private final XStreamBuilder builder;
-	private final Restfulie restfulie;
-	private final Configuration config;
-	private final Proxifier proxifier;
-	private final Router router;
+	protected final XStreamBuilder builder;
+	protected final Restfulie restfulie;
+	protected final Configuration config;
+	protected final Proxifier proxifier;
+	protected final Router router;
 
 	public HypermediaSerializationJSON(HttpServletResponse response,
 			TypeNameExtractor extractor, Restfulie restfulie,
@@ -54,6 +54,10 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 		return xStream;
 	}
 
+	public String toJson(Object o) {
+		return getXStream().toXML(o);
+	}
+
 	private HypermediaJSONConverter hypermediaConverter(XStream xStream) {
 		MethodValueSupportConverter converter = new MethodValueSupportConverter(
 				new ReflectionConverter(xStream.getMapper(),
@@ -62,5 +66,4 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 				converter, restfulie, config, router, proxifier);
 		return hypermediaConverted;
 	}
-
 }
