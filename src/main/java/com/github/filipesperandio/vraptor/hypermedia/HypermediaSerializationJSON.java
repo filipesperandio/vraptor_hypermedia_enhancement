@@ -1,5 +1,7 @@
 package com.github.filipesperandio.vraptor.hypermedia;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.config.Configuration;
@@ -55,7 +57,11 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 	}
 
 	public String toJson(Object o) {
-		return getXStream().toXML(o);
+		try {
+			return getXStream().toXML(o);
+		} catch (Exception e) {
+			return "";
+		}
 	}
 
 	private HypermediaJSONConverter hypermediaConverter(XStream xStream) {
