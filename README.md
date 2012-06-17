@@ -54,4 +54,9 @@ Ex.:
 ```
 
 
+### More of it:
+You can use it in conjuction to Vraptor Scaffold, there is a fork that extends the scaffold functionality, adds
+hypermedia-enchancement, angularjs and bootstrapjs, check it out:
+https://github.com/filipesperandio/vraptor-scaffold
+
 

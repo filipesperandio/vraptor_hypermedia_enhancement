@@ -17,10 +17,39 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-generator/1.3.RC2/hamcrest-generator-1.3.RC2.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-generator/1.3.RC2/hamcrest-generator-1.3.RC2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/org/hamcrest/hamcrest-generator/1.3.RC2/hamcrest-generator-1.3.RC2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-integration/1.3.RC2/hamcrest-integration-1.3.RC2.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-integration/1.3.RC2/hamcrest-integration-1.3.RC2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/org/hamcrest/hamcrest-integration/1.3.RC2/hamcrest-integration-1.3.RC2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-library/1.3.RC2/hamcrest-library-1.3.RC2.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-library/1.3.RC2/hamcrest-library-1.3.RC2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/org/hamcrest/hamcrest-library/1.3.RC2/hamcrest-library-1.3.RC2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/br/com/caelum/iogi/0.9.1/iogi-0.9.1.jar" sourcepath="M2_REPO/br/com/caelum/iogi/0.9.1/iogi-0.9.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/br/com/caelum/iogi/0.9.1/iogi-0.9.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/javassist/javassist/3.6.0.GA/javassist-3.6.0.GA.jar"/>
-  <classpathentry kind="var" path="M2_REPO/jboss/javassist/3.7.ga/javassist-3.7.ga.jar" sourcepath="M2_REPO/jboss/javassist/3.7.ga/javassist-3.7.ga-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jcommon/1.0.15/jcommon-1.0.15.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jfreechart/1.0.12/jfreechart-1.0.12.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jmock/jmock/2.5.1/jmock-2.5.1.jar" sourcepath="M2_REPO/org/jmock/jmock/2.5.1/jmock-2.5.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/org/jmock/jmock/2.5.1/jmock-2.5.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/jmock/jmock-legacy/2.5.1/jmock-legacy-2.5.1.jar" sourcepath="M2_REPO/org/jmock/jmock-legacy/2.5.1/jmock-legacy-2.5.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/org/jmock/jmock-legacy/2.5.1/jmock-legacy-2.5.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar" sourcepath="M2_REPO/junit/junit/4.10/junit-4.10-sources.jar">
     <attributes>
       <attribute value="jar:file:/Users/filipesperandio/.m2/repository/junit/junit/4.10/junit-4.10-javadoc.jar!/" name="javadoc_location"/>
@@ -41,14 +70,14 @@
       <attribute value="jar:file:/Users/filipesperandio/.m2/repository/org/objenesis/objenesis/1.1/objenesis-1.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/ognl/ognl/2.7.3/ognl-2.7.3.jar" sourcepath="M2_REPO/ognl/ognl/2.7.3/ognl-2.7.3-sources.jar">
-    <attributes>
-      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/ognl/ognl/2.7.3/ognl-2.7.3-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/com/thoughtworks/paranamer/paranamer/2.2/paranamer-2.2.jar" sourcepath="M2_REPO/com/thoughtworks/paranamer/paranamer/2.2/paranamer-2.2-sources.jar">
     <attributes>
       <attribute value="jar:file:/Users/filipesperandio/.m2/repository/com/thoughtworks/paranamer/paranamer/2.2/paranamer-2.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/qdox/qdox/1.6.1/qdox-1.6.1.jar" sourcepath="M2_REPO/qdox/qdox/1.6.1/qdox-1.6.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/qdox/qdox/1.6.1/qdox-1.6.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/net/sf/scannotation/scannotation/1.0.2/scannotation-1.0.2.jar" sourcepath="M2_REPO/net/sf/scannotation/scannotation/1.0.2/scannotation-1.0.2-sources.jar">
@@ -73,9 +102,9 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/3.0.5.RELEASE/spring-core-3.0.5.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-core/3.0.5.RELEASE/spring-core-3.0.5.RELEASE-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/3.0.5.RELEASE/spring-expression-3.0.5.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-expression/3.0.5.RELEASE/spring-expression-3.0.5.RELEASE-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/3.0.5.RELEASE/spring-web-3.0.5.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-web/3.0.5.RELEASE/spring-web-3.0.5.RELEASE-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/br/com/caelum/vraptor/3.4.0/vraptor-3.4.0.jar" sourcepath="M2_REPO/br/com/caelum/vraptor/3.4.0/vraptor-3.4.0-sources.jar">
+  <classpathentry kind="var" path="M2_REPO/br/com/caelum/vraptor/3.4.1/vraptor-3.4.1.jar" sourcepath="M2_REPO/br/com/caelum/vraptor/3.4.1/vraptor-3.4.1-sources.jar">
     <attributes>
-      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/br/com/caelum/vraptor/3.4.0/vraptor-3.4.0-javadoc.jar!/" name="javadoc_location"/>
+      <attribute value="jar:file:/Users/filipesperandio/.m2/repository/br/com/caelum/vraptor/3.4.1/vraptor-3.4.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar"/>

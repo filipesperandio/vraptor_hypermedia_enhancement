@@ -1,11 +1,12 @@
 package com.github.filipesperandio.vraptor.hypermedia;
 
-import java.util.List;
+import java.io.Writer;
 
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.config.Configuration;
 import br.com.caelum.vraptor.http.route.Router;
+import br.com.caelum.vraptor.interceptor.DefaultTypeNameExtractor;
 import br.com.caelum.vraptor.interceptor.TypeNameExtractor;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
@@ -18,6 +19,10 @@ import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
+import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
+import com.thoughtworks.xstream.io.json.JsonWriter;
 
 /**
  * It replaces {@link RestfulSerializationJSON} generating link artifacts as
@@ -50,18 +55,19 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 
 	@Override
 	protected XStream getXStream() {
-		XStream xStream = builder.jsonInstance();
-		withoutRoot();
+		// TODO replace xStream init to the code commented out once Vraptor fixes Serializee null pointer.
+		// XStream xStream = builder.jsonInstance();
+		// withoutRoot();
+
+		XStream xStream = builder.configure(new HypermediaXStream(
+				new DefaultTypeNameExtractor(), getHierarchicalStreamDriver()));
+		
 		xStream.registerConverter(hypermediaConverter(xStream));
 		return xStream;
 	}
 
 	public String toJson(Object o) {
-		try {
-			return getXStream().toXML(o);
-		} catch (Exception e) {
-			return "";
-		}
+		return getXStream().toXML(o);
 	}
 
 	private HypermediaJSONConverter hypermediaConverter(XStream xStream) {
@@ -71,5 +77,17 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 		HypermediaJSONConverter hypermediaConverted = new HypermediaJSONConverter(
 				converter, restfulie, config, router, proxifier);
 		return hypermediaConverted;
+	}
+
+	protected HierarchicalStreamDriver getHierarchicalStreamDriver() {
+		final String newLine = "\n";
+		final char[] lineIndenter = { ' ', ' ' };
+
+		return new JsonHierarchicalStreamDriver() {
+			public HierarchicalStreamWriter createWriter(Writer writer) {
+				return new JsonWriter(writer, lineIndenter, newLine,
+						JsonWriter.DROP_ROOT_MODE);
+			}
+		};
 	}
 }

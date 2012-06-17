@@ -31,6 +31,7 @@ public class HypermediaJSONConverter extends LinkConverterJSON {
 
 	public void marshal(Object root, HierarchicalStreamWriter writer,
 			MarshallingContext context) {
+		
 		if (root instanceof ConfigurableHypermediaResource) {
 			context.convertAnother(((ConfigurableHypermediaResource) root)
 					.getModel());

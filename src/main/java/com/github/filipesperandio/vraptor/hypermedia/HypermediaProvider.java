@@ -5,6 +5,7 @@ import br.com.caelum.vraptor.ioc.spring.SpringProvider;
 import br.com.caelum.vraptor.restfulie.DefaultRestfulie;
 import br.com.caelum.vraptor.restfulie.Restfulie;
 import br.com.caelum.vraptor.serialization.JSONSerialization;
+import br.com.caelum.vraptor.util.jpa.EntityManagerCreator;
 
 /**
  * Add this provider to you app by setting up web.xml with the following:
@@ -23,8 +24,8 @@ import br.com.caelum.vraptor.serialization.JSONSerialization;
 public class HypermediaProvider extends SpringProvider {
 	@Override
 	protected void registerCustomComponents(ComponentRegistry registry) {
-		registry.register(JSONSerialization.class,
-				HypermediaSerializationJSON.class);
+		registry.register(JSONSerialization.class, HypermediaSerializationJSON.class);
 		registry.register(Restfulie.class, DefaultRestfulie.class);
+		
 	}
 }
