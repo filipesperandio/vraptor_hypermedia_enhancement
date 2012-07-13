@@ -13,7 +13,7 @@ import com.thoughtworks.xstream.mapper.MapperWrapper;
  * TEMP SOLUTION
  * 
  * @author filipesperandio
- *
+ * 
  */
 public class HypermediaXStream extends XStream {
 	private final TypeNameExtractor extractor;
@@ -38,11 +38,11 @@ public class HypermediaXStream extends XStream {
 	protected MapperWrapper wrapMapper(MapperWrapper next) {
 
 		vraptorMapper = new VRaptorClassMapper(next,
-		new Supplier<TypeNameExtractor>() {
-			public TypeNameExtractor get() {
-				return extractor;
-			}
-		});
+				new Supplier<TypeNameExtractor>() {
+					public TypeNameExtractor get() {
+						return extractor;
+					}
+				});
 		vraptorMapper.setSerializee(new Serializee());
 		return vraptorMapper;
 	}

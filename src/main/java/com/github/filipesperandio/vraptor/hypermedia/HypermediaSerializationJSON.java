@@ -55,19 +55,24 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 
 	@Override
 	protected XStream getXStream() {
-		// TODO replace xStream init to the code commented out once Vraptor fixes Serializee null pointer.
+		// TODO replace xStream init to the code commented out once Vraptor
+		// fixes Serializee null pointer.
 		// XStream xStream = builder.jsonInstance();
 		// withoutRoot();
 
 		XStream xStream = builder.configure(new HypermediaXStream(
 				new DefaultTypeNameExtractor(), getHierarchicalStreamDriver()));
-		
+
 		xStream.registerConverter(hypermediaConverter(xStream));
 		return xStream;
 	}
 
 	public String toJson(Object o) {
-		return getXStream().toXML(o);
+		try {
+			return getXStream().toXML(o);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	private HypermediaJSONConverter hypermediaConverter(XStream xStream) {

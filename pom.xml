@@ -4,7 +4,7 @@
   <groupId>com.github.filipesperandio.vraptor</groupId>
   <artifactId>vraptor-hypermedia</artifactId>
   <packaging>jar</packaging>
-  <version>3.4.1-SNAPSHOT</version>
+  <version>3.4.1.1-SNAPSHOT</version>
   <name>vraptor-hypermedia-enhancement</name>
   <description>Vraptor hypermedia enhancement</description>
   <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
@@ -64,6 +64,11 @@
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
       <version>1.4.1</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>1.6</version>
     </dependency>
   </dependencies>
 

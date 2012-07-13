@@ -11,6 +11,7 @@
       <attribute value="jar:file:/Users/filipesperandio/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/1.6/gson-1.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/r07/guava-r07.jar" sourcepath="M2_REPO/com/google/guava/guava/r07/guava-r07-sources.jar">
     <attributes>
       <attribute value="jar:file:/Users/filipesperandio/.m2/repository/com/google/guava/guava/r07/guava-r07-javadoc.jar!/" name="javadoc_location"/>
