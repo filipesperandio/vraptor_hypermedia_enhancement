@@ -4,10 +4,10 @@
   <groupId>com.github.filipesperandio.vraptor</groupId>
   <artifactId>vraptor-hypermedia</artifactId>
   <packaging>jar</packaging>
-  <version>3.4.2-SNAPSHOT</version>
-  <name>vraptor-hypermedia-enhancement</name>
+  <version>3.4.1.deserializer</version>
+  <name>vraptor_hypermedia_enhancement</name>
   <description>Vraptor hypermedia enhancement</description>
-  <url>http://github.com/filipesperandio/vraptor-hypermedia-enhancement</url>
+  <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
 
   <licenses>
     <license>
@@ -18,10 +18,10 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git@github.com:filipesperandio/vraptor-hypermedia-enhancement.git</connection>
-    <developerConnection>scm:git:git@github.com:filipesperandio/vraptor-hypermedia-enhancement.git</developerConnection>
+    <connection>scm:git:git@github.com:filipesperandio/vraptor_hypermedia_enhancement.git</connection>
+    <developerConnection>scm:git:git@github.com:filipesperandio/vraptor_hypermedia_enhancement.git</developerConnection>
     <tag>HEAD</tag>
-    <url>git@github.com:filipesperandio/vraptor-hypermedia-enhancement.git</url>
+    <url>git@github.com:filipesperandio/vraptor_hypermedia_enhancement.git</url>
   </scm>
 
   <developers>
@@ -44,12 +44,6 @@
   </parent>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>br.com.caelum</groupId>
       <artifactId>vraptor</artifactId>
@@ -105,7 +99,7 @@
   <distributionManagement>
     <site>
       <id>vraptor-hypermedia-enhancement</id>
-      <url>${site-base-url}/vraptor-hypermedia-enhancement/</url>
+      <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
     </site>
   </distributionManagement>
 
