@@ -4,7 +4,7 @@
   <groupId>com.github.filipesperandio.vraptor</groupId>
   <artifactId>vraptor-hypermedia</artifactId>
   <packaging>jar</packaging>
-  <version>3.4.2.deserializer-SNAPSHOT</version>
+  <version>3.4.1.deserializer</version>
   <name>vraptor_hypermedia_enhancement</name>
   <description>Vraptor hypermedia enhancement</description>
   <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
@@ -76,22 +76,27 @@
         </property>
       </activation>
       <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.1</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-project-info-reports-plugin</artifactId>
+                  <version>2.4</version>
+              </plugin>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-gpg-plugin</artifactId>
+                  <version>1.1</version>
+                  <executions>
+                      <execution>
+                          <id>sign-artifacts</id>
+                          <phase>verify</phase>
+                          <goals>
+                              <goal>sign</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+          </plugins>
       </build>
     </profile>
   </profiles>
