@@ -4,10 +4,10 @@
   <groupId>com.github.filipesperandio.vraptor</groupId>
   <artifactId>vraptor-hypermedia</artifactId>
   <packaging>jar</packaging>
-  <version>3.4.1.1</version>
+  <version>3.4.1.deserializer_patch</version>
   <name>vraptor-hypermedia-enhancement</name>
   <description>Vraptor hypermedia enhancement</description>
-  <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
+  <url>http://github.com/filipesperandio/vraptor-hypermedia-enhancement</url>
 
   <licenses>
     <license>
@@ -18,10 +18,10 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git@github.com:filipesperandio/vraptor_hypermedia_enhancement.git</connection>
-    <developerConnection>scm:git:git@github.com:filipesperandio/vraptor_hypermedia_enhancement.git</developerConnection>
+    <connection>scm:git:git@github.com:filipesperandio/vraptor-hypermedia-enhancement.git</connection>
+    <developerConnection>scm:git:git@github.com:filipesperandio/vraptor-hypermedia-enhancement.git</developerConnection>
     <tag>HEAD</tag>
-    <url>git@github.com:filipesperandio/vraptor_hypermedia_enhancement.git</url>
+    <url>git@github.com:filipesperandio/vraptor-hypermedia-enhancement.git</url>
   </scm>
 
   <developers>
