@@ -4,7 +4,7 @@
     <groupId>com.github.filipesperandio.vraptor</groupId>
     <artifactId>vraptor-hypermedia</artifactId>
     <packaging>jar</packaging>
-    <version>3.4.1.deserializer</version>
+    <version>3.4.1.7.deserializer</version>
     <name>vraptor-hypermedia-enhancement</name>
     <description>Vraptor hypermedia enhancement</description>
     <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
