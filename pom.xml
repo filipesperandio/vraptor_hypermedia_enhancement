@@ -4,8 +4,8 @@
     <groupId>com.github.filipesperandio.vraptor</groupId>
     <artifactId>vraptor-hypermedia</artifactId>
     <packaging>jar</packaging>
-    <version>3.4.1.7-deserializer-SNAPSHOT</version>
-    <name>vraptor_hypermedia_enhancement</name>
+    <version>3.4.1.deserializer</version>
+    <name>vraptor-hypermedia-enhancement</name>
     <description>Vraptor hypermedia enhancement</description>
     <url>http://github.com/filipesperandio/vraptor_hypermedia_enhancement</url>
 
@@ -104,10 +104,9 @@
     <distributionManagement>
         <site>
             <id>vraptor-hypermedia-enhancement</id>
-            <url>https://oss.sonatype.org/service/local/repositories/comgithubfilipesperandio-112/content/com/github/filipesperandio/vraptor/vraptor-hypermedia</url>
+            <url>${site-base-url}/vraptor-hypermedia-enhancement/</url>
         </site>
     </distributionManagement>
-
 
     <build>
         <pluginManagement>
