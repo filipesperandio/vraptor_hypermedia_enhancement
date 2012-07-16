@@ -1,5 +1,7 @@
 package com.github.filipesperandio.vraptor.hypermedia;
 
+import java.util.Collection;
+
 import br.com.caelum.vraptor.config.Configuration;
 import br.com.caelum.vraptor.http.route.Router;
 import br.com.caelum.vraptor.proxy.Proxifier;
@@ -56,8 +58,6 @@ public class HypermediaJSONConverter extends LinkConverterJSON {
 				context.convertAnother(hypermediaTransaction);
 				writer.endNode();
 			}
-			writer.endNode();
 		}
 	}
-
 }

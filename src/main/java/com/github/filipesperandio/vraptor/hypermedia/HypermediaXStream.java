@@ -43,7 +43,6 @@ public class HypermediaXStream extends XStream {
 						return extractor;
 					}
 				});
-		vraptorMapper.setSerializee(new Serializee());
 		return vraptorMapper;
 	}
 
