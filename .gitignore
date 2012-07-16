@@ -1,3 +1,5 @@
 target
 vraptor-hypermedia-enhancement-bundle.jar
 *DS_Store
+pom.xml.releaseBackup
+release.properties

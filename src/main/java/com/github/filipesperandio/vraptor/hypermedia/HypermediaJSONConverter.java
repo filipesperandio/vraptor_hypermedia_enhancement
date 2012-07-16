@@ -58,6 +58,7 @@ public class HypermediaJSONConverter extends LinkConverterJSON {
 				context.convertAnother(hypermediaTransaction);
 				writer.endNode();
 			}
+			writer.endNode();
 		}
 	}
 }
