@@ -1,4 +1,4 @@
-package com.github.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia.json;
 
 import br.com.caelum.vraptor.resource.HttpMethod;
 

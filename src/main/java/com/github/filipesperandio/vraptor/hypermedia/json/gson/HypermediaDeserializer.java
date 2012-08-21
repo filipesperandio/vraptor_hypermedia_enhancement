@@ -1,4 +1,4 @@
-package com.github.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia.json.gson;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -19,6 +19,8 @@ import br.com.caelum.vraptor.restfulie.serialization.MethodValueSupportConverter
 import br.com.caelum.vraptor.serialization.ProxyInitializer;
 import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 
+import com.github.filipesperandio.vraptor.hypermedia.json.CompatibilityWrapper;
+import com.github.filipesperandio.vraptor.hypermedia.json.xstream.HypermediaConverter;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
@@ -26,7 +28,7 @@ import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 @Component
 @RequestScoped
 @Deserializes({ "application/json", "json" })
-public class HypermediaJSONDeserializer extends JsonDeserializer {
+public class HypermediaDeserializer extends JsonDeserializer {
 
 	private final XStreamBuilder builder;
 	private final Restfulie restfulie;
@@ -34,7 +36,7 @@ public class HypermediaJSONDeserializer extends JsonDeserializer {
 	private final Proxifier proxifier;
 	private final Configuration config;
 
-	public HypermediaJSONDeserializer(ParameterNameProvider provider,
+	public HypermediaDeserializer(ParameterNameProvider provider,
 			TypeNameExtractor extractor, XStreamBuilder builder,
 			Restfulie restfulie, Configuration config,
 			ProxyInitializer initializer, Router router, Proxifier proxifier) {
@@ -48,17 +50,17 @@ public class HypermediaJSONDeserializer extends JsonDeserializer {
 
 	@Override
 	protected XStream getXStream() {
-		XStream xStream = builder.configure(new HypermediaXStream(
+		XStream xStream = builder.configure(new CompatibilityWrapper(
 				new DefaultTypeNameExtractor(), getHierarchicalStreamDriver()));
 		xStream.registerConverter(hypermediaConverter(xStream));
 		return xStream;
 	}
 
-	private HypermediaJSONConverter hypermediaConverter(XStream xStream) {
+	private HypermediaConverter hypermediaConverter(XStream xStream) {
 		MethodValueSupportConverter converter = new MethodValueSupportConverter(
 				new ReflectionConverter(xStream.getMapper(),
 						xStream.getReflectionProvider()));
-		HypermediaJSONConverter hypermediaConverted = new HypermediaJSONConverter(
+		HypermediaConverter hypermediaConverted = new HypermediaConverter(
 				converter, restfulie, config, router, proxifier);
 		return hypermediaConverted;
 	}

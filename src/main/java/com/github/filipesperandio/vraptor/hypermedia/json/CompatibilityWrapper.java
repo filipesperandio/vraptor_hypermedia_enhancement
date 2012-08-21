@@ -1,4 +1,4 @@
-package com.github.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia.json;
 
 import br.com.caelum.vraptor.interceptor.TypeNameExtractor;
 import br.com.caelum.vraptor.serialization.xstream.Serializee;
@@ -10,12 +10,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
 
 /**
- * TEMP SOLUTION
- * 
  * @author filipesperandio
- * 
  */
-public class HypermediaXStream extends XStream {
+public class CompatibilityWrapper extends XStream {
 	private final TypeNameExtractor extractor;
 	private VRaptorClassMapper vraptorMapper;
 
@@ -23,12 +20,12 @@ public class HypermediaXStream extends XStream {
 		setMode(NO_REFERENCES);
 	}
 
-	public HypermediaXStream(TypeNameExtractor extractor) {
+	public CompatibilityWrapper(TypeNameExtractor extractor) {
 		super();
 		this.extractor = extractor;
 	}
 
-	public HypermediaXStream(TypeNameExtractor extractor,
+	public CompatibilityWrapper(TypeNameExtractor extractor,
 			HierarchicalStreamDriver hierarchicalStreamDriver) {
 		super(hierarchicalStreamDriver);
 		this.extractor = extractor;

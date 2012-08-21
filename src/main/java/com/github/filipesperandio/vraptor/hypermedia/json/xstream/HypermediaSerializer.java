@@ -1,4 +1,4 @@
-package com.github.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia.json.xstream;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -21,9 +21,10 @@ import br.com.caelum.vraptor.serialization.xstream.Serializee;
 import br.com.caelum.vraptor.serialization.xstream.VRaptorClassMapper;
 import br.com.caelum.vraptor.serialization.xstream.XStreamSerializer;
 
+import com.github.filipesperandio.vraptor.hypermedia.json.CompatibilityWrapper;
 import com.thoughtworks.xstream.XStream;
 
-public class HypermediaXStreamSerializer extends XStreamSerializer {
+public class HypermediaSerializer extends XStreamSerializer {
 
 	private final XStream xstream;
 	private final Writer writer;
@@ -31,7 +32,7 @@ public class HypermediaXStreamSerializer extends XStreamSerializer {
 	private final ProxyInitializer initializer;
 	private final Serializee serializee = new Serializee();
 
-	public HypermediaXStreamSerializer(XStream xstream, Writer writer,
+	public HypermediaSerializer(XStream xstream, Writer writer,
 			TypeNameExtractor extractor, ProxyInitializer initializer) {
 		super(xstream, writer, extractor, initializer);
 		this.xstream = xstream;
@@ -68,6 +69,7 @@ public class HypermediaXStreamSerializer extends XStreamSerializer {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private Collection<Object> normalizeList(Object obj) {
 		Collection<Object> list;
 		if (hasDefaultConverter()) {
@@ -122,9 +124,10 @@ public class HypermediaXStreamSerializer extends XStreamSerializer {
 		return this;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void serialize() {
-		if (xstream instanceof HypermediaXStream) {
-			VRaptorClassMapper mapper = ((HypermediaXStream) xstream)
+		if (xstream instanceof CompatibilityWrapper) {
+			VRaptorClassMapper mapper = ((CompatibilityWrapper) xstream)
 					.getVRaptorMapper();
 			mapper.setSerializee(serializee);
 		} else {

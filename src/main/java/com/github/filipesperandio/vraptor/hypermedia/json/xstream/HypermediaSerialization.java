@@ -1,4 +1,4 @@
-package com.github.filipesperandio.vraptor.hypermedia;
+package com.github.filipesperandio.vraptor.hypermedia.json.xstream;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -20,6 +20,8 @@ import br.com.caelum.vraptor.serialization.SerializerBuilder;
 import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 import br.com.caelum.vraptor.view.ResultException;
 
+import com.github.filipesperandio.vraptor.hypermedia.json.CompatibilityWrapper;
+import com.github.filipesperandio.vraptor.hypermedia.json.HypermediaProvider;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
@@ -37,7 +39,7 @@ import com.thoughtworks.xstream.io.json.JsonWriter.Format;
  */
 @Component
 @RequestScoped
-public class HypermediaSerializationJSON extends RestfulSerializationJSON {
+public class HypermediaSerialization extends RestfulSerializationJSON {
 
 	protected final XStreamBuilder builder;
 	protected final Restfulie restfulie;
@@ -46,7 +48,7 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 	protected final Router router;
 	private XStream xstream;
 
-	public HypermediaSerializationJSON(HttpServletResponse response,
+	public HypermediaSerialization(HttpServletResponse response,
 			TypeNameExtractor extractor, Restfulie restfulie,
 			Configuration config, ProxyInitializer initializer,
 			XStreamBuilder builder, Router router, Proxifier proxifier) {
@@ -60,7 +62,7 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 
 	@Override
 	protected XStream getXStream() {
-		xstream = builder.configure(new HypermediaXStream(
+		xstream = builder.configure(new CompatibilityWrapper(
 				new DefaultTypeNameExtractor(), getHierarchicalStreamDriver()));
 		xstream.registerConverter(hypermediaConverter(xstream));
 		return xstream;
@@ -74,11 +76,11 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 		}
 	}
 
-	private HypermediaJSONConverter hypermediaConverter(XStream xStream) {
+	private HypermediaConverter hypermediaConverter(XStream xStream) {
 		MethodValueSupportConverter converter = new MethodValueSupportConverter(
 				new ReflectionConverter(xStream.getMapper(),
 						xStream.getReflectionProvider()));
-		HypermediaJSONConverter hypermediaConverted = new HypermediaJSONConverter(
+		HypermediaConverter hypermediaConverted = new HypermediaConverter(
 				converter, restfulie, config, router, proxifier);
 		return hypermediaConverted;
 	}
@@ -100,7 +102,7 @@ public class HypermediaSerializationJSON extends RestfulSerializationJSON {
 	@Override
 	protected SerializerBuilder getSerializer() {
 		try {
-			return new HypermediaXStreamSerializer(getXStream(),
+			return new HypermediaSerializer(getXStream(),
 					response.getWriter(), extractor, initializer);
 		} catch (IOException e) {
 			throw new ResultException("Unable to serialize data", e);

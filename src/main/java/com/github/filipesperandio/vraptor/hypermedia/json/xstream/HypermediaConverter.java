@@ -1,6 +1,4 @@
-package com.github.filipesperandio.vraptor.hypermedia;
-
-import java.util.Collection;
+package com.github.filipesperandio.vraptor.hypermedia.json.xstream;
 
 import br.com.caelum.vraptor.config.Configuration;
 import br.com.caelum.vraptor.http.route.Router;
@@ -12,18 +10,21 @@ import br.com.caelum.vraptor.restfulie.relation.Relation;
 import br.com.caelum.vraptor.restfulie.relation.RelationBuilder;
 import br.com.caelum.vraptor.restfulie.serialization.LinkConverterJSON;
 
+import com.github.filipesperandio.vraptor.hypermedia.json.HypermediaLink;
+import com.github.filipesperandio.vraptor.hypermedia.json.HypermediaRelationBuilder;
+import com.github.filipesperandio.vraptor.hypermedia.json.UrlAndHttpMethodRelation;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.io.ExtendedHierarchicalStreamWriterHelper;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-public class HypermediaJSONConverter extends LinkConverterJSON {
+public class HypermediaConverter extends LinkConverterJSON {
 
 	private final Converter base;
 	private final Router router;
 	private final Proxifier proxifier;
 
-	public HypermediaJSONConverter(Converter base, Restfulie restfulie,
+	public HypermediaConverter(Converter base, Restfulie restfulie,
 			Configuration config, Router router, Proxifier proxifier) {
 		super(base, restfulie, config);
 		this.base = base;
