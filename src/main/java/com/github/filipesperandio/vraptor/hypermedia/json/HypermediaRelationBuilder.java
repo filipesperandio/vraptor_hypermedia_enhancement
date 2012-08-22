@@ -36,7 +36,7 @@ public class HypermediaRelationBuilder extends DefaultRelationBuilder {
 		}
 
 		public <T> T uses(final Class<T> controller) {
-			return proxifier.proxify(controller, new MethodInvocation<T>() {
+			MethodInvocation<T> handler = new MethodInvocation<T>() {
 				public Object intercept(T proxy, Method javaMethod,
 						Object[] args, SuperMethod superMethod) {
 					String url = router.urlFor(controller, javaMethod, args);
@@ -53,7 +53,9 @@ public class HypermediaRelationBuilder extends DefaultRelationBuilder {
 					}
 					return HttpMethod.GET;
 				}
-			});
+			};
+			
+			return proxifier.proxify(controller, handler);
 		}
 	}
 }

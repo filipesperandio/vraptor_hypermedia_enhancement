@@ -3,75 +3,43 @@ package com.github.filipesperandio.vraptor.hypermedia.json.gson;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import br.com.caelum.vraptor.config.Configuration;
 import br.com.caelum.vraptor.deserialization.Deserializes;
 import br.com.caelum.vraptor.deserialization.JsonDeserializer;
 import br.com.caelum.vraptor.http.ParameterNameProvider;
-import br.com.caelum.vraptor.http.route.Router;
-import br.com.caelum.vraptor.interceptor.DefaultTypeNameExtractor;
 import br.com.caelum.vraptor.interceptor.TypeNameExtractor;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
-import br.com.caelum.vraptor.proxy.Proxifier;
 import br.com.caelum.vraptor.resource.ResourceMethod;
-import br.com.caelum.vraptor.restfulie.Restfulie;
-import br.com.caelum.vraptor.restfulie.serialization.MethodValueSupportConverter;
-import br.com.caelum.vraptor.serialization.ProxyInitializer;
 import br.com.caelum.vraptor.serialization.xstream.XStreamBuilder;
 
-import com.github.filipesperandio.vraptor.hypermedia.json.CompatibilityWrapper;
-import com.github.filipesperandio.vraptor.hypermedia.json.xstream.HypermediaConverter;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 
 @Component
 @RequestScoped
 @Deserializes({ "application/json", "json" })
 public class HypermediaDeserializer extends JsonDeserializer {
 
-	private final XStreamBuilder builder;
-	private final Restfulie restfulie;
-	private final Router router;
-	private final Proxifier proxifier;
-	private final Configuration config;
+	private Gson gson;
 
 	public HypermediaDeserializer(ParameterNameProvider provider,
-			TypeNameExtractor extractor, XStreamBuilder builder,
-			Restfulie restfulie, Configuration config,
-			ProxyInitializer initializer, Router router, Proxifier proxifier) {
+			TypeNameExtractor extractor, XStreamBuilder builder) {
 		super(provider, extractor, builder);
-		this.builder = builder;
-		this.restfulie = restfulie;
-		this.config = config;
-		this.router = router;
-		this.proxifier = proxifier;
-	}
-
-	@Override
-	protected XStream getXStream() {
-		XStream xStream = builder.configure(new CompatibilityWrapper(
-				new DefaultTypeNameExtractor(), getHierarchicalStreamDriver()));
-		xStream.registerConverter(hypermediaConverter(xStream));
-		return xStream;
-	}
-
-	private HypermediaConverter hypermediaConverter(XStream xStream) {
-		MethodValueSupportConverter converter = new MethodValueSupportConverter(
-				new ReflectionConverter(xStream.getMapper(),
-						xStream.getReflectionProvider()));
-		HypermediaConverter hypermediaConverted = new HypermediaConverter(
-				converter, restfulie, config, router, proxifier);
-		return hypermediaConverted;
+		this.gson = new GsonBuilder().create();
 	}
 
 	@Override
 	public Object[] deserialize(InputStream inputStream, ResourceMethod method) {
-		Scanner s = new Scanner(inputStream);
-		String json = s.useDelimiter("\\A").next();
+		String json = readToTheEnd(inputStream);
+		Class<?> firstMethodParam = method.getMethod().getParameterTypes()[0];
+
 		Object[] objects = new Object[1];
-		objects[0] = new GsonBuilder().create().fromJson(json,
-				method.getMethod().getParameterTypes()[0]);
+		objects[0] = gson.fromJson(json, firstMethodParam);
 		return objects;
+	}
+
+	private String readToTheEnd(InputStream inputStream) {
+		Scanner s = new Scanner(inputStream);
+		return s.useDelimiter("\\A").next();
 	}
 }

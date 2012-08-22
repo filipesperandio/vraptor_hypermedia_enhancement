@@ -17,7 +17,7 @@ import com.github.filipesperandio.vraptor.hypermedia.json.gson.HypermediaSeriali
  * {@code
  *  <context-param>
  *    <param-name>br.com.caelum.vraptor.provider</param-name>
- *    <param-value>com.github.filipesperandio.vraptor.hypermedia.HypermediaProvider</param-value>
+ *    <param-value>com.github.filipesperandio.vraptor.hypermedia.json.HypermediaProvider</param-value>
  *  </context-param>
  * }
  * </pre>

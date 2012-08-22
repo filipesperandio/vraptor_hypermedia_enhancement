@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.caelum.vraptor.http.route.Router;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+import br.com.caelum.vraptor.proxy.Proxifier;
 import br.com.caelum.vraptor.restfulie.serialization.RestfulSerializationJSON;
 import br.com.caelum.vraptor.serialization.JSONSerialization;
 import br.com.caelum.vraptor.serialization.NoRootSerialization;
@@ -29,17 +31,21 @@ public class HypermediaSerialization implements JSONSerialization {
 
 	private final HttpServletResponse response;
 	private final ProxyInitializer initializer;
+	private final Proxifier proxifier;
+	private final Router router;
 
 	public HypermediaSerialization(HttpServletResponse response,
-			ProxyInitializer initializer) {
+			ProxyInitializer initializer,Router router, Proxifier proxifier) {
 		this.response = response;
 		this.initializer = initializer;
+		this.router = router;
+		this.proxifier = proxifier;
 
 	}
 
 	protected SerializerBuilder getSerializer() {
 		try {
-			return new HypermediaSerializer(response.getWriter(), initializer);
+			return new HypermediaSerializer(response.getWriter(), initializer, router, proxifier);
 		} catch (IOException e) {
 			throw new ResultException("Unable to serialize data", e);
 		}

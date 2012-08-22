@@ -10,6 +10,10 @@ public class HypermediaLink {
 		this.method = method;
 		this.url = url;
 	}
+	
+	public HypermediaLink(UrlAndHttpMethodRelation h) {
+		this(h.getMethod(), h.getUri());
+	}
 
 	public HttpMethod getMethod() {
 		return method;
