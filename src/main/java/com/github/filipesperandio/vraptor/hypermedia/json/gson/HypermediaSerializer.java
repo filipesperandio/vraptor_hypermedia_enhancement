@@ -4,7 +4,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -102,22 +104,79 @@ public class HypermediaSerializer implements SerializerBuilder {
 
 	public void serialize() {
 		JsonElement element = gson.toJsonTree(serializee.getRoot());
-		addHypermediaLinks(element, serializee.getRoot());
+		try {
+			addHypermediaLinks(element, serializee.getRoot());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		write(gson.toJson(element));
 
 	}
 
-	private void addHypermediaLinks(JsonElement element, Object root) {
+	private void addHypermediaLinks(JsonElement element, Object root)
+			throws IllegalArgumentException, IllegalAccessException {
 		if (root instanceof Collection) {
-			List collection = new ArrayList((Collection) root);
-			JsonArray array = (JsonArray) element;
-			for (int i = 0; i < collection.size(); i++) {
-				addHypermediaLinks(array.get(i), collection.get(i));
-			}
+			addHypermediaLinksForCollections((JsonArray) element, root);
 		} else {
-			JsonObject resource = (JsonObject) element;
-			resource.add("links", hypermediaRelation(root));
+			JsonObject jsonObj = (JsonObject) element;
+			for (Field field : findFields(root)) {
+				field.setAccessible(true);
+				Object fieldObj = field.get(root);
+				if (fieldObj != null) {
+					addLinksToFields(jsonObj, field, fieldObj);
+				}
+			}
+			addLinksNode(jsonObj, root);
 		}
+	}
+
+	private void addLinksToFields(JsonObject resource, Field field,
+			Object fieldObj) throws IllegalAccessException {
+		Class<?> type = field.getType();
+		String fieldName = field.getName();
+		if (isHypermedia(type)) {
+			addLinksNode((JsonObject) resource.get(fieldName), fieldObj);
+		} else if (isCollection(type)) {
+			addHypermediaLinksForCollections(
+					(JsonArray) resource.get(fieldName), fieldObj);
+		}
+	}
+
+	private boolean isHypermedia(Class<?> type) {
+		return HypermediaResource.class.isAssignableFrom(type);
+	}
+
+	private boolean isCollection(Class<?> type) {
+		return Collection.class.isAssignableFrom(type);
+	}
+
+	private void addHypermediaLinksForCollections(JsonArray array, Object root)
+			throws IllegalAccessException {
+		List<Object> collection = new ArrayList<Object>((Collection) root);
+		for (int i = 0; i < collection.size(); i++) {
+			addHypermediaLinks(array.get(i), collection.get(i));
+		}
+	}
+
+	private void addLinksNode(JsonObject resource, Object fieldObj) {
+		resource.add("links", hypermediaRelation(fieldObj));
+	}
+
+	private List<Field> findFields(Object root) {
+		List<Field> fields = new ArrayList<Field>();
+		Class<? extends Object> clazz = root.getClass();
+		fields.addAll(extractFieldsFrom(clazz));
+
+		return fields;
+	}
+
+	private List<Field> extractFieldsFrom(Class<? extends Object> clazz) {
+		List<Field> fields = new ArrayList<Field>(Arrays.asList(clazz
+				.getDeclaredFields()));
+		Class<?> superclass = clazz.getSuperclass();
+		if (superclass != null)
+			fields.addAll(extractFieldsFrom(superclass));
+		return fields;
 	}
 
 	private JsonObject hypermediaRelation(Object obj) {
@@ -132,10 +191,11 @@ public class HypermediaSerializer implements SerializerBuilder {
 			resource.configureRelations(builder);
 
 			if (!builder.getRelations().isEmpty()) {
-				for (Relation t : builder.getRelations()) {
-					UrlAndHttpMethodRelation h = (UrlAndHttpMethodRelation) t;
-					JsonElement link = gson.toJsonTree(new HypermediaLink(h));
-					linkRelation.add(h.getName(), link);
+				for (Relation relation : builder.getRelations()) {
+					UrlAndHttpMethodRelation hypermediaRelation = (UrlAndHttpMethodRelation) relation;
+					JsonElement link = gson.toJsonTree(new HypermediaLink(
+							hypermediaRelation));
+					linkRelation.add(hypermediaRelation.getName(), link);
 				}
 			}
 		}

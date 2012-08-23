@@ -3,10 +3,12 @@ package com.github.filipesperandio.vraptor.hypermedia.json.gson;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import br.com.caelum.vraptor.deserialization.Deserializer;
 import br.com.caelum.vraptor.deserialization.Deserializes;
 import br.com.caelum.vraptor.deserialization.JsonDeserializer;
 import br.com.caelum.vraptor.http.ParameterNameProvider;
 import br.com.caelum.vraptor.interceptor.TypeNameExtractor;
+import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.resource.ResourceMethod;
@@ -16,15 +18,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @Component
-@RequestScoped
+@ApplicationScoped
 @Deserializes({ "application/json", "json" })
-public class HypermediaDeserializer extends JsonDeserializer {
+public class HypermediaDeserializer implements Deserializer {
 
 	private Gson gson;
 
-	public HypermediaDeserializer(ParameterNameProvider provider,
-			TypeNameExtractor extractor, XStreamBuilder builder) {
-		super(provider, extractor, builder);
+	public HypermediaDeserializer() {
 		this.gson = new GsonBuilder().create();
 	}
 

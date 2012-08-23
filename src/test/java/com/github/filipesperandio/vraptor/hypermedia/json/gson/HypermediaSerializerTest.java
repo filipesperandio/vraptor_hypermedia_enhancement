@@ -10,6 +10,7 @@ import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +53,7 @@ public class HypermediaSerializerTest {
 	@Test
 	public void shouldAddLinksToSerializedObject() {
 
-		Entity entity = new Entity();
+		EntityModel entity = new EntityModel();
 		entity.setId(10L);
 
 		serializer.from(entity).serialize();
@@ -66,22 +67,46 @@ public class HypermediaSerializerTest {
 
 	@Test
 	public void shouldAddLinksToSerializedObjectList() {
-		
-		Entity entity = new Entity();
+
+		EntityModel entity = new EntityModel();
 		entity.setId(10L);
-		
+
 		serializer.from(Arrays.asList(entity)).serialize();
-		
+
 		String serilizedJson = writer.getBuffer().toString();
-		
+
 		String expected = "[{\"id\":10,\"links\":{\"location\":{\"method\":\"GET\",\"url\":\"/get/10\"}}}]";
-		
+
 		assertThat(serilizedJson, equalTo(expected));
 	}
-	
+
 	@Test
 	public void shouldSerializeEmptyArray() {
 		serializer.from(new ArrayList()).serialize();
 		assertThat(writer.getBuffer().toString(), equalTo("[]"));
+	}
+
+	@Test
+	public void shouldAddHypermediaDataToInnerResources() {
+		Embedded embedded1 = createEmbeddedResourceWithId(1L);
+		Embedded embedded2 = createEmbeddedResourceWithId(2L);
+
+		List<Embedded> embeddeds = Arrays.asList(embedded1, embedded2);
+
+		EntityModel resource = new EntityModel();
+		resource.setId(10L);
+		resource.setEmbeddeds(embeddeds);
+
+		serializer.from(resource).serialize();
+
+		String expected = "{\"embeddeds\":[{\"id\":1,\"links\":{\"location\":{\"method\":\"GET\",\"url\":\"/get/10\"}}},{\"id\":2,\"links\":{\"location\":{\"method\":\"GET\",\"url\":\"/get/10\"}}}],\"id\":10,\"links\":{\"location\":{\"method\":\"GET\",\"url\":\"/get/10\"}}}";
+
+		assertThat(writer.getBuffer().toString(), equalTo(expected));
+	}
+
+	private Embedded createEmbeddedResourceWithId(long id) {
+		Embedded embedded = new Embedded();
+		embedded.setId(id);
+		return embedded;
 	}
 }

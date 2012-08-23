@@ -1,26 +1,25 @@
 package com.github.filipesperandio.vraptor.hypermedia.json.gson;
 
+import java.io.Serializable;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 import br.com.caelum.vraptor.restfulie.hypermedia.HypermediaResource;
-import br.com.caelum.vraptor.restfulie.relation.RelationBuilder;
-import br.com.caelum.vraptor.restfulie.relation.RelationBuilder.WithName;
 
-public class Entity implements HypermediaResource{
-		private Long id;
-		
-		public void setId(Long id) {
-			this.id = id;
-		}
+@MappedSuperclass
+public abstract class Entity implements HypermediaResource, Serializable {
+	@Id
+	@GeneratedValue
+	private Long id;
 
-		public Long getId() {
-			return id;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		@Override
-		public void configureRelations(RelationBuilder builder) {
-			WithName relation = builder.relation("location");
-			Controller uses = relation.uses(Controller.class);
-			uses.load(this);
-		}
-		
+	public Long getId() {
+		return id;
+	}
 
 }
