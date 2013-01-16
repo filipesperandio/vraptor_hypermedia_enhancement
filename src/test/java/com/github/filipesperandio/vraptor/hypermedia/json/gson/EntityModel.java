@@ -11,6 +11,17 @@ public class EntityModel extends Entity {
 
 	@ElementCollection
 	private List<Embedded> embeddeds;
+	
+	@ElementCollection
+	private List<String> embeddedPrimitive;
+
+	public List<String> getEmbeddedPrimitive() {
+		return embeddedPrimitive;
+	}
+
+	public void setEmbeddedPrimitive(List<String> embeddedPrimitive) {
+		this.embeddedPrimitive = embeddedPrimitive;
+	}
 
 	@Override
 	public void configureRelations(RelationBuilder builder) {

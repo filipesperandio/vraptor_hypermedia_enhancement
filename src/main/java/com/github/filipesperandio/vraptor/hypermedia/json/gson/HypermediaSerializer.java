@@ -32,7 +32,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
+@SuppressWarnings("all")
 public class HypermediaSerializer implements SerializerBuilder {
 
 	private final Writer writer;
@@ -116,17 +118,19 @@ public class HypermediaSerializer implements SerializerBuilder {
 	private void addHypermediaLinks(JsonElement element, Object root)
 			throws IllegalArgumentException, IllegalAccessException {
 		if (root instanceof Collection) {
-			addHypermediaLinksForCollections((JsonArray) element, root);
+			addHypermediaLinksForCollections(element.getAsJsonArray(), root);
 		} else {
-			JsonObject jsonObj = (JsonObject) element;
-			for (Field field : findFields(root)) {
-				field.setAccessible(true);
-				Object fieldObj = field.get(root);
-				if (fieldObj != null) {
-					addLinksToFields(jsonObj, field, fieldObj);
+			if (!(element instanceof JsonPrimitive)) {
+				JsonObject jsonObj = element.getAsJsonObject();
+				for (Field field : findFields(root)) {
+					field.setAccessible(true);
+					Object fieldObj = field.get(root);
+					if (fieldObj != null) {
+						addLinksToFields(jsonObj, field, fieldObj);
+					}
 				}
+				addLinksNode(jsonObj, root);
 			}
-			addLinksNode(jsonObj, root);
 		}
 	}
 

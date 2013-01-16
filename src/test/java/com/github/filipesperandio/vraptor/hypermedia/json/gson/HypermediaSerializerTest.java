@@ -66,6 +66,22 @@ public class HypermediaSerializerTest {
 	}
 
 	@Test
+	public void shouldAddLinksToSerializedObjectWithPrimitiveCollectionOnIt() {
+		
+		EntityModel entity = new EntityModel();
+		entity.setId(10L);
+		entity.setEmbeddedPrimitive(Arrays.asList("123"));
+		
+		serializer.from(entity).serialize();
+		
+		String serilizedJson = writer.getBuffer().toString();
+
+		String expected = "{\"embeddedPrimitive\":[\"123\"],\"id\":10,\"links\":{\"location\":{\"method\":\"GET\",\"url\":\"/get/10\"}}}";
+		
+		assertThat(serilizedJson, equalTo(expected));
+	}
+
+	@Test
 	public void shouldAddLinksToSerializedObjectList() {
 
 		EntityModel entity = new EntityModel();
@@ -80,6 +96,7 @@ public class HypermediaSerializerTest {
 		assertThat(serilizedJson, equalTo(expected));
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void shouldSerializeEmptyArray() {
 		serializer.from(new ArrayList()).serialize();
