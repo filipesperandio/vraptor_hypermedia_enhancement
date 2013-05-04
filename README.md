@@ -23,7 +23,7 @@ Update web.xml accordingly:
   </context-param>
 ```
 
-## What is does?
+## What it does?
 
 It changes the relations model in order to help your javascript code to be more readable an easy to do.
 
